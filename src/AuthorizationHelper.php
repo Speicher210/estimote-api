@@ -3,10 +3,47 @@
 namespace Speicher210\Estimote;
 
 use GuzzleHttp\Client as GuzzleClient;
-use Speicher210\Estimote\Auth\Application;
+use GuzzleHttp\Exception\ClientException;
+use Speicher210\Estimote\Auth\Application as ApplicationAuthorization;
 
 class AuthorizationHelper
 {
+    /**
+     * Check if an application authorization is valid.
+     *
+     * @param ApplicationAuthorization $applicationAuthorization The authorization code to check.
+     * @return boolean
+     */
+    public function isApplicationAuthorizationValid(ApplicationAuthorization $applicationAuthorization)
+    {
+        try {
+            $client = new ClientAppAuth($applicationAuthorization);
+            // We get the visits and filter so we get no data back.
+            // We are only interested if the request is authorized or not.
+            $response = $client->get(
+                'analytics/visits',
+                [
+                    'query' => [
+                        'from' => time(),
+                        'to' => time(),
+                        'granularity' => 'hourly',
+                    ],
+                ]
+            );
+
+            return $response->getStatusCode() === 200;
+        } catch (ClientException $e) {
+            $response = $e->getResponse();
+            if ($response->getStatusCode() === 401 || $response->getStatusCode() === 403) {
+                return false;
+            }
+
+            throw $e;
+        }
+
+        return false;
+    }
+
     public function authorizeApplication($clientId, $clientSecret, $username, $password)
     {
         $client = new GuzzleClient(['cookies' => true, 'allow_redirects' => true]);
@@ -101,6 +138,6 @@ class AuthorizationHelper
 
         $json = \GuzzleHttp\json_decode($response->getBody(), true);
 
-        return new Application($json['name'], $json['token']);
+        return new ApplicationAuthorization($json['name'], $json['token']);
     }
 }
