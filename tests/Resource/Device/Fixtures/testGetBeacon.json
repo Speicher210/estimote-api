@@ -1,0 +1,34 @@
+{
+  "id": "56c94a8d-9424-4d9c-9a2f-54fc81995f86:123:456",
+  "uuid": "56c94a8d-9424-4d9c-9a2f-54fc81995f86",
+  "major": 123,
+  "minor": 456,
+  "mac": "abcdef1234",
+  "settings": {
+    "battery": 100,
+    "interval": 200,
+    "hardware": "D3.4",
+    "firmware": "A2.1",
+    "basic_power_mode": false,
+    "smart_power_mode": true,
+    "timezone": "Europe/Berlin",
+    "security": false,
+    "motion_detection": false,
+    "conditional_broadcasting": "off",
+    "broadcasting_scheme": "estimote",
+    "range": 4,
+    "power": 4,
+    "firmware_deprecated": true,
+    "firmware_newest": false,
+    "location": null
+  },
+  "color": "transparent",
+  "context_id": 123456,
+  "name": "testing",
+  "battery_life_expectancy_in_days": 209,
+  "tags": [],
+  "context": {
+    "name": "transparent",
+    "organization_id": 11111
+  }
+}

@@ -29,7 +29,7 @@ class Beacon
      * @var string
      *
      * @JMS\Type("string")
-     * @JMS\SerializedName("UUID")
+     * @JMS\SerializedName("uuid")
      */
     protected $uuid;
 
@@ -104,6 +104,26 @@ class Beacon
         $this->id = $id;
 
         return $this;
+    }
+
+    /**
+     * Get the UUID.
+     *
+     * @return string
+     */
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
+
+    /**
+     * Set the UUID.
+     *
+     * @param string $uuid The UUID to set.
+     */
+    public function setUuid($uuid)
+    {
+        $this->uuid = $uuid;
     }
 
     /**
@@ -196,5 +216,25 @@ class Beacon
         $this->name = $name;
 
         return $this;
+    }
+
+    /**
+     * Get the beacon settings.
+     *
+     * @return Settings
+     */
+    public function getSettings()
+    {
+        return $this->settings;
+    }
+
+    /**
+     * Set the beacon settings.
+     *
+     * @param Settings $settings The settings.
+     */
+    public function setSettings(Settings $settings)
+    {
+        $this->settings = $settings;
     }
 }

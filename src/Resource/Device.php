@@ -10,6 +10,26 @@ use Speicher210\Estimote\Model\Beacon\Update as BeaconUpdate;
 class Device extends AbstractResource
 {
     /**
+     * Get one beacon.
+     *
+     * @return BeaconModel
+     */
+    public function getBeacon($mac)
+    {
+        try {
+            $response = $this->client->get('beacons/'.$mac);
+
+            return $this->serializer->deserialize(
+                $response->getBody(),
+                BeaconModel::class,
+                'json'
+            );
+        } catch (ClientException $e) {
+            throw $this->createApiException($e);
+        }
+    }
+
+    /**
      * Get the list of beacons.
      *
      * @return BeaconModel[]

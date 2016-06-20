@@ -30,7 +30,7 @@ class Settings
      * @JMS\Type("string")
      * @JMS\SerializedName("broadcasting_scheme")
      */
-    protected $broadcasting_scheme;
+    protected $broadcastingScheme;
 
     /**
      * Range.
@@ -51,4 +51,96 @@ class Settings
      * @JMS\SerializedName("power")
      */
     protected $power;
+
+    /**
+     * Get broadcasting the interval.
+     *
+     * @return integer
+     */
+    public function getInterval()
+    {
+        return $this->interval;
+    }
+
+    /**
+     * Set the broadcasting interval
+     *
+     * @param integer $interval The interval.
+     * @return Settings
+     */
+    public function setInterval($interval)
+    {
+        $this->interval = $interval;
+
+        return $this;
+    }
+
+    /**
+     * Get the broadcasting scheme.
+     *
+     * @return string
+     */
+    public function getBroadcastingScheme()
+    {
+        return $this->broadcastingScheme;
+    }
+
+    /**
+     * Set the broadcasting scheme.
+     *
+     * @param string $broadcastingScheme The scheme.
+     * @return Settings
+     */
+    public function setBroadcastingScheme($broadcastingScheme)
+    {
+        $this->broadcastingScheme = $broadcastingScheme;
+
+        return $this;
+    }
+
+    /**
+     * Get the range.
+     *
+     * @return integer
+     */
+    public function getRange()
+    {
+        return $this->range;
+    }
+
+    /**
+     * Set the range.
+     *
+     * @param integer $range The range to set.
+     * @return Settings
+     */
+    public function setRange($range)
+    {
+        $this->range = $range;
+
+        return $this;
+    }
+
+    /**
+     * Get the power.
+     *
+     * @return integer
+     */
+    public function getPower()
+    {
+        return $this->power;
+    }
+
+    /**
+     * Set the power.
+     *
+     * @param integer $power The power.
+     * @return Settings
+     */
+    public function setPower($power)
+    {
+        $this->power = $power;
+
+        return $this;
+    }
 }
