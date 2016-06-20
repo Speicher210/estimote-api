@@ -44,6 +44,33 @@ class AuthorizationHelper
         return false;
     }
 
+    /**
+     * Check if the username and password is valid.
+     *
+     * @param string $username The username.
+     * @param string $password The password.
+     * @return boolean
+     */
+    public function isUsernameAndPasswordValid($username, $password)
+    {
+        $client = new GuzzleClient(['cookies' => true, 'allow_redirects' => true]);
+
+        // Login into the portal.
+        $client->post(
+            'https://cloud.estimote.com/v1/login',
+            [
+                'headers' => [
+                    'Content-Type' => '	application/json',
+                ],
+                'json' => array('username' => $username, 'password' => $password),
+            ]
+        );
+
+        $response = $client->get('https://cloud.estimote.com/v1/users/current');
+
+        return $response->getStatusCode() >= 200 && $response->getStatusCode() < 300;
+    }
+
     public function authorizeApplication($clientId, $clientSecret, $username, $password)
     {
         $client = new GuzzleClient(['cookies' => true, 'allow_redirects' => true]);
