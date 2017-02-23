@@ -5,13 +5,14 @@ namespace Speicher210\Estimote\Test\Resource;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use GuzzleHttp\Client;
 use JMS\Serializer\SerializerBuilder;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Speicher210\Estimote\AbstractResource;
 
 /**
  * Abstract class to test resource classes.
  */
-abstract class AbstractResourceTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractResourceTest extends TestCase
 {
     /**
      * The temporary directory for the serializer cache.
@@ -26,7 +27,7 @@ abstract class AbstractResourceTest extends \PHPUnit_Framework_TestCase
     public static function setUpBeforeClass()
     {
         if (self::$serializerTempDirectory === null) {
-            self::$serializerTempDirectory = sys_get_temp_dir().'/'.uniqid('sp210_estimote_api_test', true);
+            self::$serializerTempDirectory = sys_get_temp_dir() . '/' . uniqid('sp210_estimote_api_test', true);
         }
     }
 
@@ -98,8 +99,8 @@ abstract class AbstractResourceTest extends \PHPUnit_Framework_TestCase
     protected function getTestFixture($suffix)
     {
         $reflection = new \ReflectionObject($this);
-        $fixturesDirectory = dirname($reflection->getFileName()).'/Fixtures/';
+        $fixturesDirectory = dirname($reflection->getFileName()) . '/Fixtures/';
 
-        return file_get_contents($fixturesDirectory.$this->getName().$suffix);
+        return file_get_contents($fixturesDirectory . $this->getName() . $suffix);
     }
 }
