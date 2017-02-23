@@ -9,8 +9,6 @@ use function GuzzleHttp\default_user_agent;
 class ClientAppAuth extends Client
 {
     /**
-     * Constructor.
-     *
      * @param Application $authorization The application authorization.
      */
     public function __construct(Application $authorization)
@@ -21,8 +19,8 @@ class ClientAppAuth extends Client
                 'auth' => [$authorization->getId(), $authorization->getToken()],
                 'headers' => [
                     'Accept' => 'application/json',
-                    'User-Agent' => 'Speicher210/Estimote '.default_user_agent(),
-                ],
+                    'User-Agent' => 'Speicher210/Estimote ' . default_user_agent()
+                ]
             ]
         );
     }

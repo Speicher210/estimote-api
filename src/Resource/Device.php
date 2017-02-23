@@ -12,12 +12,13 @@ class Device extends AbstractResource
     /**
      * Get one beacon.
      *
+     * @param string $mac
      * @return BeaconModel
      */
     public function getBeacon($mac)
     {
         try {
-            $response = $this->client->get('beacons/'.$mac);
+            $response = $this->client->get('beacons/' . $mac);
 
             return $this->serializer->deserialize(
                 $response->getBody(),
@@ -60,12 +61,12 @@ class Device extends AbstractResource
     {
         try {
             $response = $this->client->post(
-                'beacons/'.$beaconMac.'/pending_settings',
+                'beacons/' . $beaconMac . '/pending_settings',
                 [
                     'headers' => [
-                        'Content-Type' => 'application/json',
+                        'Content-Type' => 'application/json'
                     ],
-                    'body' => $this->serializer->serialize($data, 'json'),
+                    'body' => $this->serializer->serialize($data, 'json')
                 ]
             );
 

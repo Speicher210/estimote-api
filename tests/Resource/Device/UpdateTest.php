@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Speicher210\Estimote\Test\Resource\Device;
 
 use Speicher210\Estimote\Model\Beacon\Update;
@@ -20,22 +22,22 @@ class BeaconsTest extends AbstractResourceTest
     {
         $deviceMac = 'abcdef123';
 
-        $clientMock = $this->getClientMock(array('post'));
+        $clientMock = $this->getClientMock(['post']);
         $responseMock = $this->getClientResponseMock('{"status":"ok"}', 200);
         $clientMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('post')
             ->with(
-                'beacons/'.$deviceMac.'/pending_settings',
-                $this->callback(
+                'beacons/' . $deviceMac . '/pending_settings',
+                self::callback(
                     function ($values) use ($deviceMac) {
-                        $this->assertArrayHasKey('headers', $values);
-                        $this->assertArrayHasKey('Content-Type', $values['headers']);
-                        $this->assertSame('application/json', $values['headers']['Content-Type']);
+                        self::assertArrayHasKey('headers', $values);
+                        self::assertArrayHasKey('Content-Type', $values['headers']);
+                        self::assertSame('application/json', $values['headers']['Content-Type']);
 
-                        $this->assertArrayHasKey('body', $values);
+                        self::assertArrayHasKey('body', $values);
 
-                        $expected = array(
+                        $expected = [
                             'uuid' => '',
                             'major' => 123,
                             'minor' => 456,
@@ -43,10 +45,10 @@ class BeaconsTest extends AbstractResourceTest
                             'power' => 0,
                             'basic_power_mode' => true,
                             'smart_power_mode' => false,
-                            'security' => false,
-                        );
+                            'security' => false
+                        ];
 
-                        $this->assertJsonStringEqualsJsonString(json_encode($expected), $values['body']);
+                        self::assertJsonStringEqualsJsonString(\json_encode($expected), $values['body']);
 
                         return true;
                     }
@@ -68,6 +70,6 @@ class BeaconsTest extends AbstractResourceTest
         $resource = $this->getResourceToTest($clientMock);
         $actual = $resource->updateBeacon($deviceMac, $updateData);
 
-        $this->assertTrue($actual);
+        self::assertTrue($actual);
     }
 }

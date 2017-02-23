@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Speicher210\Estimote\Test\Resource;
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
@@ -27,7 +29,7 @@ abstract class AbstractResourceTest extends TestCase
     public static function setUpBeforeClass()
     {
         if (self::$serializerTempDirectory === null) {
-            self::$serializerTempDirectory = sys_get_temp_dir() . '/' . uniqid('sp210_estimote_api_test', true);
+            self::$serializerTempDirectory = \sys_get_temp_dir() . '/' . \uniqid('sp210_estimote_api_test', true);
         }
     }
 
@@ -64,11 +66,11 @@ abstract class AbstractResourceTest extends TestCase
     {
         $mock = $this
             ->getMockBuilder(ResponseInterface::class)
-            ->setMethods(array('getBody', 'getStatusCode'))
+            ->setMethods(['getBody', 'getStatusCode'])
             ->getMockForAbstractClass();
 
-        $mock->expects($this->any())->method('getBody')->with()->willReturn($body);
-        $mock->expects($this->any())->method('getStatusCode')->with()->willReturn($statusCode);
+        $mock->expects(self::any())->method('getBody')->with()->willReturn($body);
+        $mock->expects(self::any())->method('getStatusCode')->with()->willReturn($statusCode);
 
         return $mock;
     }
@@ -87,9 +89,8 @@ abstract class AbstractResourceTest extends TestCase
             ->build();
 
         $class = $this->getClassUnderTest();
-        $resource = new $class($clientMock, $serializer);
 
-        return $resource;
+        return new $class($clientMock, $serializer);
     }
 
     /**
@@ -99,8 +100,8 @@ abstract class AbstractResourceTest extends TestCase
     protected function getTestFixture($suffix)
     {
         $reflection = new \ReflectionObject($this);
-        $fixturesDirectory = dirname($reflection->getFileName()) . '/Fixtures/';
+        $fixturesDirectory = \dirname($reflection->getFileName()) . '/Fixtures/';
 
-        return file_get_contents($fixturesDirectory . $this->getName() . $suffix);
+        return \file_get_contents($fixturesDirectory . $this->getName() . $suffix);
     }
 }

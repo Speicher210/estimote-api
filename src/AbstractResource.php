@@ -29,8 +29,6 @@ abstract class AbstractResource
     protected $serializer;
 
     /**
-     * Constructor.
-     *
      * @param Client $client The API client.
      * @param SerializerInterface $serializer Serializer interface to serialize / deserialize the request / responses.
      */
@@ -50,7 +48,7 @@ abstract class AbstractResource
     {
         $response = $e->getResponse();
 
-        if ($response->getStatusCode() === 401 || $response->getStatusCode() === 403) {
+        if (in_array($response->getStatusCode(), [401, 403], true)) {
             throw new ApiKeyInvalidException();
         }
 

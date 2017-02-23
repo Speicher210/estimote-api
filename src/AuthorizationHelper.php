@@ -24,24 +24,22 @@ class AuthorizationHelper
                 'analytics/visits',
                 [
                     'query' => [
-                        'from' => time(),
-                        'to' => time(),
-                        'granularity' => 'hourly',
-                    ],
+                        'from' => \time(),
+                        'to' => \time(),
+                        'granularity' => 'hourly'
+                    ]
                 ]
             );
 
             return $response->getStatusCode() === 200;
         } catch (ClientException $e) {
             $response = $e->getResponse();
-            if ($response->getStatusCode() === 401 || $response->getStatusCode() === 403) {
+            if (in_array($response->getStatusCode(), [401, 403], true)) {
                 return false;
             }
 
             throw $e;
         }
-
-        return false;
     }
 
     /**
@@ -60,9 +58,9 @@ class AuthorizationHelper
             'https://cloud.estimote.com/v1/login',
             [
                 'headers' => [
-                    'Content-Type' => '	application/json',
+                    'Content-Type' => '	application/json'
                 ],
-                'json' => array('username' => $username, 'password' => $password),
+                'json' => ['username' => $username, 'password' => $password]
             ]
         );
 
@@ -80,20 +78,20 @@ class AuthorizationHelper
             'https://cloud.estimote.com/v1/login',
             [
                 'headers' => [
-                    'Content-Type' => 'application/json',
+                    'Content-Type' => 'application/json'
                 ],
-                'json' => array('username' => $username, 'password' => $password),
+                'json' => ['username' => $username, 'password' => $password]
             ]
         );
 
-        $url = 'https://cloud.estimote.com/v1/oauth2/client_details?response_type=code&client_id='.$clientId.'&redirect_uri=http://localhost';
+        $url = 'https://cloud.estimote.com/v1/oauth2/client_details?response_type=code&client_id=' . $clientId . '&redirect_uri=http://localhost';
         $response = $client->get($url, ['allow_redirects' => false]);
 
         $json = \GuzzleHttp\json_decode($response->getBody(), true);
 
-        $query = parse_url($json['redirect'], PHP_URL_QUERY);
-        $output = array();
-        parse_str($query, $output);
+        $query = \parse_url($json['redirect'], \PHP_URL_QUERY);
+        $output = [];
+        \parse_str($query, $output);
         $code = $output['code'];
 
         $response = $client->post(
@@ -104,8 +102,8 @@ class AuthorizationHelper
                     'grant_type' => 'authorization_code',
                     'code' => $code,
                     'client_id' => $clientId,
-                    'client_secret' => $clientSecret,
-                ],
+                    'client_secret' => $clientSecret
+                ]
             ]
         );
 
@@ -121,14 +119,14 @@ class AuthorizationHelper
             'https://cloud.estimote.com/v1/oauth2/access_token',
             [
                 'headers' => [
-                    'Content-Type' => 'application/x-www-form-urlencoded',
+                    'Content-Type' => 'application/x-www-form-urlencoded'
                 ],
                 'form_params' => [
                     'grant_type' => 'authorization_code',
                     'code' => $authorizationCode,
                     'client_id' => $clientId,
-                    'client_secret' => $clientSecret,
-                ],
+                    'client_secret' => $clientSecret
+                ]
             ]
         );
 
@@ -146,9 +144,9 @@ class AuthorizationHelper
             'https://cloud.estimote.com/v1/login',
             [
                 'headers' => [
-                    'Content-Type' => '	application/json',
+                    'Content-Type' => '	application/json'
                 ],
-                'json' => array('username' => $username, 'password' => $password),
+                'json' => ['username' => $username, 'password' => $password]
             ]
         );
 
@@ -158,8 +156,8 @@ class AuthorizationHelper
                 'json' => [
                     'name' => $applicationName,
                     'description' => $applicationName,
-                    'template' => 'your-own-app',
-                ],
+                    'template' => 'your-own-app'
+                ]
             ]
         );
 

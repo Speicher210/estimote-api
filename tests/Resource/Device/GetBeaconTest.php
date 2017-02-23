@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types = 1);
 
 namespace Speicher210\Estimote\Test\Resource\Device;
 
@@ -21,13 +22,13 @@ class GetBeaconTest extends AbstractResourceTest
     {
         $deviceMac = 'abcdef1234';
 
-        $clientMock = $this->getClientMock(array('get'));
-        $responseMock = $this->getClientResponseMock(file_get_contents(__DIR__.'/Fixtures/testGetBeacon.json'), 200);
+        $clientMock = $this->getClientMock(['get']);
+        $responseMock = $this->getClientResponseMock(\file_get_contents(__DIR__ . '/Fixtures/testGetBeacon.json'), 200);
 
         $clientMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('get')
-            ->with('beacons/'.$deviceMac)
+            ->with('beacons/' . $deviceMac)
             ->willReturn($responseMock);
 
         /** @var Device $resource */
@@ -48,6 +49,6 @@ class GetBeaconTest extends AbstractResourceTest
         $expectedSettings->setPower(4);
         $expected->setSettings($expectedSettings);
 
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 }
