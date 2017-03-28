@@ -1,20 +1,25 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Speicher210\Estimote;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
 use Speicher210\Estimote\Auth\Application as ApplicationAuthorization;
 
+/**
+ * Helper class for dealing with Estimote authorization.
+ */
 class AuthorizationHelper
 {
     /**
      * Check if an application authorization is valid.
      *
      * @param ApplicationAuthorization $applicationAuthorization The authorization code to check.
-     * @return boolean
+     * @return bool
      */
-    public function isApplicationAuthorizationValid(ApplicationAuthorization $applicationAuthorization)
+    public function isApplicationAuthorizationValid(ApplicationAuthorization $applicationAuthorization): bool
     {
         try {
             $client = new ClientAppAuth($applicationAuthorization);
@@ -34,7 +39,7 @@ class AuthorizationHelper
             return $response->getStatusCode() === 200;
         } catch (ClientException $e) {
             $response = $e->getResponse();
-            if (in_array($response->getStatusCode(), [401, 403], true)) {
+            if (\in_array($response->getStatusCode(), [401, 403], true)) {
                 return false;
             }
 
@@ -47,22 +52,31 @@ class AuthorizationHelper
      *
      * @param string $username The username.
      * @param string $password The password.
-     * @return boolean
+     * @return bool
      */
-    public function isUsernameAndPasswordValid($username, $password)
+    public function isUsernameAndPasswordValid(string $username, string $password): bool
     {
         $client = new GuzzleClient(['cookies' => true, 'allow_redirects' => true]);
 
-        // Login into the portal.
-        $client->post(
-            'https://cloud.estimote.com/v1/login',
-            [
-                'headers' => [
-                    'Content-Type' => '	application/json'
-                ],
-                'json' => ['username' => $username, 'password' => $password]
-            ]
-        );
+        try {
+            // Login into the portal.
+            $client->post(
+                'https://cloud.estimote.com/v1/login',
+                [
+                    'headers' => [
+                        'Content-Type' => '	application/json'
+                    ],
+                    'json' => ['username' => $username, 'password' => $password]
+                ]
+            );
+        } catch (ClientException $e) {
+            $response = $e->getResponse();
+            if (\in_array($response->getStatusCode(), [401, 403], true)) {
+                return false;
+            }
+
+            throw $e;
+        }
 
         $response = $client->get('https://cloud.estimote.com/v1/users/current');
 
