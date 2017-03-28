@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Speicher210\Estimote;
 
 use GuzzleHttp\Client;
@@ -7,7 +9,6 @@ use GuzzleHttp\Exception\ClientException;
 use JMS\Serializer\SerializerInterface;
 use Speicher210\Estimote\Exception\ApiException;
 use Speicher210\Estimote\Exception\ApiKeyInvalidException;
-use Speicher210\Estimote\Model\Beacon as BeaconModel;
 
 /**
  * Abstract resource.
@@ -44,14 +45,14 @@ abstract class AbstractResource
      * @param ClientException $e The client exception.
      * @return ApiException
      */
-    protected function createApiException(ClientException $e)
+    protected function createApiException(ClientException $e): ApiException
     {
         $response = $e->getResponse();
 
-        if (in_array($response->getStatusCode(), [401, 403], true)) {
+        if (\in_array($response->getStatusCode(), [401, 403], true)) {
             throw new ApiKeyInvalidException();
         }
 
-        throw new ApiException((string)$response->getBody());
+        return new ApiException((string)$response->getBody());
     }
 }
