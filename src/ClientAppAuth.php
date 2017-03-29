@@ -17,7 +17,7 @@ class ClientAppAuth extends Client
     {
         parent::__construct(
             [
-                'base_uri' => 'https://cloud.estimote.com/v1/',
+                'base_uri' => 'https://cloud.estimote.com/',
                 'auth' => [$authorization->getId(), $authorization->getToken()],
                 'headers' => [
                     'Accept' => 'application/json',

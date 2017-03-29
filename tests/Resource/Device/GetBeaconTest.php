@@ -28,7 +28,7 @@ class GetBeaconTest extends AbstractResourceTest
         $clientMock
             ->expects(self::once())
             ->method('get')
-            ->with('beacons/' . $deviceMac)
+            ->with('/v1/beacons/' . $deviceMac)
             ->willReturn($responseMock);
 
         /** @var Device $resource */

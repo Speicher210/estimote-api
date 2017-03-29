@@ -20,7 +20,7 @@ class Device extends AbstractResource
     public function getBeacon($mac)
     {
         try {
-            $response = $this->client->get('beacons/' . $mac);
+            $response = $this->client->get('/v1/beacons/' . $mac);
 
             return $this->serializer->deserialize(
                 $response->getBody(),
@@ -40,7 +40,7 @@ class Device extends AbstractResource
     public function getBeacons()
     {
         try {
-            $response = $this->client->get('beacons');
+            $response = $this->client->get('/v1/beacons');
 
             return $this->serializer->deserialize(
                 $response->getBody(),

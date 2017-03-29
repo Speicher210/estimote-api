@@ -50,7 +50,7 @@ abstract class AbstractResource
         $response = $e->getResponse();
 
         if (\in_array($response->getStatusCode(), [401, 403], true)) {
-            throw new ApiKeyInvalidException();
+            return new ApiKeyInvalidException();
         }
 
         return new ApiException((string)$response->getBody());

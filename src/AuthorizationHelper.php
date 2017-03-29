@@ -23,18 +23,7 @@ class AuthorizationHelper
     {
         try {
             $client = new ClientAppAuth($applicationAuthorization);
-            // We get the visits and filter so we get no data back.
-            // We are only interested if the request is authorized or not.
-            $response = $client->get(
-                'analytics/visits',
-                [
-                    'query' => [
-                        'from' => \time(),
-                        'to' => \time(),
-                        'granularity' => 'hourly'
-                    ]
-                ]
-            );
+            $response = $client->get('/v3/devices/newest_firmwares');
 
             return $response->getStatusCode() === 200;
         } catch (ClientException $e) {
