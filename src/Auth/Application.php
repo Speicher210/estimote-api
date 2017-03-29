@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Speicher210\Estimote\Auth;
 
 class Application
@@ -19,8 +21,6 @@ class Application
     protected $token;
 
     /**
-     * Constructor.
-     *
      * @param string $id The application ID.
      * @param string $token The application token.
      */
