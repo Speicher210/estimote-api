@@ -1,0 +1,209 @@
+[
+  {
+    "identifier": "48947e17d20c44cfcc0174618fa06337",
+    "shadow": {
+      "id": 325177,
+      "name": "lemon",
+      "tags": [
+        "123",
+        "234",
+        "345"
+      ],
+      "organization_id": 42646,
+      "location": {
+        "timezone": "America/Los_Angeles"
+      }
+    },
+    "hardware_type": "beacon",
+    "hardware_revision": "I1.1",
+    "hardware_footprint": "6e06f9e460108681d0a636e8cab6bd12402a0802",
+    "color": "lemon",
+    "form_factor": "standard",
+    "status_report": {
+      "battery_percentage": 26,
+      "battery_voltage": 6.048,
+      "estimated_battery_lifetime": 320,
+      "clock_offset": 62867,
+      "firmware_version": "4.5.0",
+      "last_synced": "2016-06-27T12:24:14.571Z"
+    },
+    "settings": {
+      "general": {
+        "motion_detection_enabled": false,
+        "dark_to_sleep_enabled": false,
+        "dark_to_sleep_threshold": 10,
+        "conditional_broadcasting": "off",
+        "smart_power_mode_enabled": false,
+        "temperature_offset": 0,
+        "eddystone_configuration_service_enabled": false,
+        "flip_to_sleep_enabled": true,
+        "schedule": {
+          "enabled": false,
+          "start_time": 0,
+          "stop_time": 0
+        },
+        "nfc_records": [
+          {
+            "data": "com.estimote.apps.main",
+            "type": "android_package"
+          }
+        ],
+        "automatic_firmware_update_enabled": false,
+        "motion_only_delay": 0
+      },
+      "advertisers": {
+        "connectivity": [
+          {
+            "index": 1,
+            "name": "connectivity",
+            "power": -12,
+            "interval": 1285,
+            "shake_to_connect_enabled": false,
+            "near_to_connect_enabled": true
+          }
+        ],
+        "ibeacon": [
+          {
+            "index": 1,
+            "name": "iBeacon",
+            "enabled": true,
+            "uuid": "B9407F30-F5F8-466E-AFF9-25556B57FE6D",
+            "major": 7244,
+            "minor": 16283,
+            "power": -12,
+            "interval": 950,
+            "security": {
+              "enabled": false,
+              "real_id": 569166,
+              "interval_scaler": 10
+            },
+            "non_strict_mode_enabled": true
+          }
+        ],
+        "eddystone_uid": [
+          {
+            "index": 1,
+            "name": "Eddystone UID",
+            "enabled": false,
+            "interval": 167,
+            "power": -30,
+            "instance_id": "f22169a2d7e1",
+            "namespace_id": "eddd1ebeac04e5defa9b"
+          }
+        ],
+        "eddystone_url": [
+          {
+            "index": 1,
+            "name": "Eddystone URL",
+            "enabled": true,
+            "interval": 200,
+            "power": -16,
+            "url": "http://example.com/"
+          }
+        ],
+        "eddystone_telemetry": [
+          {
+            "index": 1,
+            "name": "Eddystone Telemetry",
+            "enabled": true,
+            "interval": 950,
+            "power": -4
+          }
+        ],
+        "estimote_telemetry": [
+          {
+            "index": 1,
+            "name": "Estimote Telemetry",
+            "enabled": true,
+            "interval": 1500,
+            "power": -12
+          }
+        ],
+        "estimote_location": [
+          {
+            "index": 1,
+            "name": "Estimote Location",
+            "enabled": false,
+            "interval": 950,
+            "power": -12
+          }
+        ],
+        "link_network": [
+          {
+            "index": 1,
+            "name": "Here & Now",
+            "enabled": false,
+            "interval": 300,
+            "power": -12,
+            "link_id": 0,
+            "domain": null,
+            "measurement_period": 60
+          }
+        ],
+        "mesh": [
+          {
+            "index": 1,
+            "name": "Mesh",
+            "enabled": true,
+            "settings_sync_enabled": true,
+            "firmware_sync_enabled": true,
+            "interval": 300,
+            "settings_version": 1480430591,
+            "mesh_identifier": 1145,
+            "mesh_key": "1dd703ba8d792ba1493b7012377784f8",
+            "synchronisation_list": [
+              "00B0",
+              "00B1",
+              "00B8",
+              "00B9",
+              "0100",
+              "0200",
+              "0300",
+              "0101",
+              "0201",
+              "0301",
+              "0102",
+              "0202",
+              "0302",
+              "0103",
+              "0203",
+              "0303",
+              "2001",
+              "2002",
+              "2003",
+              "2004",
+              "2006"
+            ]
+          }
+        ],
+        "uwb": [
+          {
+            "index": 1,
+            "name": "UWB",
+            "interval": 500,
+            "power": -4,
+            "start_delay": 5,
+            "ranging_time": 180,
+            "broadcast_time": 180,
+            "started_at": 1480430583
+          }
+        ]
+      }
+    },
+    "pending_settings": {
+      "advertisers": {
+        "eddystone_uid": [
+          {
+            "index": 1,
+            "name": "Eddystone UID",
+            "enabled": false,
+            "interval": 167,
+            "power": -30,
+            "instance_id": "f22169a2d7e1",
+            "namespace_id": "edd1ebeac04e5def"
+          }
+        ]
+      }
+    }
+  }
+]

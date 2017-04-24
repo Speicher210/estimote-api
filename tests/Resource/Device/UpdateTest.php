@@ -4,33 +4,36 @@ declare(strict_types = 1);
 
 namespace Speicher210\Estimote\Test\Resource\Device;
 
-use Speicher210\Estimote\Model\Beacon\Update;
+use Speicher210\Estimote\Model\Device\PendingSettings;
+use Speicher210\Estimote\Model\Device\Settings\Advertisers;
+use Speicher210\Estimote\Model\Device\Settings\Advertisers\IBeacon;
+use Speicher210\Estimote\Model\Device\Update;
 use Speicher210\Estimote\Resource\Device;
 use Speicher210\Estimote\Test\Resource\AbstractResourceTest;
 
-class BeaconsTest extends AbstractResourceTest
+class UpdateTest extends AbstractResourceTest
 {
     /**
      * {@inheritdoc}
      */
-    protected function getClassUnderTest()
+    protected function getClassUnderTest(): string
     {
         return Device::class;
     }
 
-    public function testUpdateDevice()
+    public function testUpdateDevice(): void
     {
-        $deviceMac = 'abcdef123';
+        $deviceIdentifier = 'abcdef123';
 
         $clientMock = $this->getClientMock(['post']);
-        $responseMock = $this->getClientResponseMock('{"status":"ok"}', 200);
+        $responseMock = $this->getClientResponseMock('{"success": true}', 200);
         $clientMock
             ->expects(self::once())
             ->method('post')
             ->with(
-                'beacons/' . $deviceMac . '/pending_settings',
+                'v2/devices/' . $deviceIdentifier,
                 self::callback(
-                    function ($values) use ($deviceMac) {
+                    function ($values) {
                         self::assertArrayHasKey('headers', $values);
                         self::assertArrayHasKey('Content-Type', $values['headers']);
                         self::assertSame('application/json', $values['headers']['Content-Type']);
@@ -38,14 +41,24 @@ class BeaconsTest extends AbstractResourceTest
                         self::assertArrayHasKey('body', $values);
 
                         $expected = [
-                            'uuid' => '',
-                            'major' => 123,
-                            'minor' => 456,
-                            'interval' => 150,
-                            'power' => 0,
-                            'basic_power_mode' => true,
-                            'smart_power_mode' => false,
-                            'security' => false
+                            'pending_settings' => [
+                                'advertisers' => [
+                                    'ibeacon' => [
+                                        [
+                                            'index' => 1,
+                                            'name' => 'my ibeacon',
+                                            'enabled' => true,
+                                            'uuid' => 'B36C37A3-875F-4E56-9905-1F8BDC815E03',
+                                            'major' => 123,
+                                            'minor' => 456,
+                                            'power' => 0,
+                                            'interval' => 150,
+                                            'non_strict_mode_enabled' => true
+                                        ]
+                                    ],
+                                    'eddystone_url' => []
+                                ]
+                            ]
                         ];
 
                         self::assertJsonStringEqualsJsonString(\json_encode($expected), $values['body']);
@@ -56,19 +69,14 @@ class BeaconsTest extends AbstractResourceTest
             )
             ->willReturn($responseMock);
 
-        $updateData = new Update();
-        $updateData->uuid = '';
-        $updateData->major = 123;
-        $updateData->minor = 456;
-        $updateData->interval = 150;
-        $updateData->power = 0;
-        $updateData->basicPowerMode = true;
-        $updateData->smartPowerMode = false;
-        $updateData->security = false;
+        $iBeacon = new IBeacon(1, 'my ibeacon', true, 'B36C37A3-875F-4E56-9905-1F8BDC815E03', 123, 456, 0, 150, true);
+        $advertisers = new Advertisers($iBeacon, null);
+        $pendingSettings = new PendingSettings($advertisers);
+        $updateData = new Update($pendingSettings);
 
         /** @var Device $resource */
         $resource = $this->getResourceToTest($clientMock);
-        $actual = $resource->updateBeacon($deviceMac, $updateData);
+        $actual = $resource->updateDevice($deviceIdentifier, $updateData);
 
         self::assertTrue($actual);
     }

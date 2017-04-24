@@ -1,0 +1,189 @@
+{
+  "identifier": "40b53f0f65a40b6f18c91e6f16ff802d",
+  "shadow": {
+    "id": 334674,
+    "name": "test-shadow-name-1469434659017",
+    "tags": [],
+    "organization_id": 49358,
+    "location": {
+      "timezone": "Europe/Warsaw"
+    }
+  },
+  "hardware_type": "beacon",
+  "hardware_revision": "F1.3d",
+  "hardware_footprint": "ac145d5c6ad6d506f15a8a013cbda175af5ef1fd",
+  "color": "white",
+  "form_factor": "standard",
+  "status_report": {
+    "battery_percentage": 100,
+    "battery_voltage": 3.058,
+    "estimated_battery_lifetime": 888,
+    "clock_offset": 2470,
+    "firmware_version": "4.6.1",
+    "last_synced": "2016-07-25T11:44:44.552Z"
+  },
+  "alerts_configuration": {
+    "beacon_fallen_notifications": "all",
+    "beacon_stolen_notifications": "off",
+    "beacon_battery_notifications": "all"
+  },
+  "settings": {
+    "general": {
+      "motion_detection_enabled": true,
+      "motion_only_enabled": false,
+      "dark_to_sleep_enabled": false,
+      "dark_to_sleep_threshold": 10,
+      "conditional_broadcasting": "flip to stop",
+      "flip_to_sleep_enabled": true,
+      "smart_power_mode_enabled": true,
+      "temperature_offset": 0,
+      "eddystone_configuration_service_enabled": false,
+      "nfc_records": [],
+      "schedule": {
+        "enabled": false,
+        "start_time": 75600,
+        "stop_time": 32400
+      },
+      "automatic_firmware_update_enabled": false,
+      "motion_only_delay": 0
+    },
+    "advertisers": {
+      "connectivity": [
+        {
+          "index": 1,
+          "name": "connectivity",
+          "power": -12,
+          "interval": 1285,
+          "shake_to_connect_enabled": false,
+          "near_to_connect_enabled": true
+        }
+      ],
+      "ibeacon": [
+        {
+          "index": 1,
+          "name": "iBeacon",
+          "enabled": true,
+          "uuid": "B36C37A3-875F-4E56-9905-1F8BDC815E03",
+          "major": 45581,
+          "minor": 23491,
+          "power": -4,
+          "interval": 645,
+          "security": {
+            "enabled": false,
+            "real_id": 902314,
+            "interval_scaler": 10
+          },
+          "non_strict_mode_enabled": true
+        }
+      ],
+      "eddystone_uid": [
+        {
+          "index": 1,
+          "name": "Eddystone UID",
+          "enabled": false,
+          "interval": 950,
+          "power": -12,
+          "instance_id": "40b53f0f65a4",
+          "namespace_id": "edd1ebeac04e5defa017"
+        }
+      ],
+      "eddystone_url": [
+        {
+          "index": 1,
+          "name": "Eddystone URL",
+          "enabled": true,
+          "interval": 528,
+          "power": -20,
+          "url": "http://e4a90fb1a9c8.com"
+        }
+      ],
+      "eddystone_telemetry": [
+        {
+          "index": 1,
+          "name": "Eddystone Telemetry",
+          "enabled": false,
+          "interval": 950,
+          "power": -12
+        }
+      ],
+      "estimote_telemetry": [
+        {
+          "index": 1,
+          "name": "Estimote Telemetry",
+          "enabled": true,
+          "interval": 1500,
+          "power": -12
+        }
+      ],
+      "estimote_location": [
+        {
+          "index": 1,
+          "name": "Estimote Location",
+          "enabled": false,
+          "interval": 950,
+          "power": -12
+        }
+      ],
+      "link_network": [
+        {
+          "index": 1,
+          "name": "Here & Now",
+          "enabled": false,
+          "interval": 300,
+          "power": -12,
+          "link_id": 0,
+          "domain": null,
+          "measurement_period": 60
+        }
+      ],
+      "mesh": [
+        {
+          "index": 1,
+          "name": "Mesh",
+          "enabled": true,
+          "settings_sync_enabled": true,
+          "firmware_sync_enabled": true,
+          "interval": 300,
+          "settings_version": 1480430591,
+          "mesh_identifier": 1145,
+          "mesh_key": "1dd703ba8d792ba1493b7012377784f8",
+          "synchronisation_list": [
+            "00B0",
+            "00B1",
+            "00B8",
+            "00B9",
+            "0100",
+            "0200",
+            "0300",
+            "0101",
+            "0201",
+            "0301",
+            "0102",
+            "0202",
+            "0302",
+            "0103",
+            "0203",
+            "0303",
+            "2001",
+            "2002",
+            "2003",
+            "2004",
+            "2006"
+          ]
+        }
+      ],
+      "uwb": [
+        {
+          "index": 1,
+          "name": "UWB",
+          "interval": 500,
+          "power": -4,
+          "start_delay": 5,
+          "ranging_time": 180,
+          "broadcast_time": 180,
+          "started_at": 1480430583
+        }
+      ]
+    }
+  }
+}

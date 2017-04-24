@@ -7,15 +7,11 @@ namespace Speicher210\Estimote\Auth;
 class Application
 {
     /**
-     * The application ID.
-     *
      * @var string
      */
     protected $id;
 
     /**
-     * The application token.
-     *
      * @var string
      */
     protected $token;
@@ -30,22 +26,12 @@ class Application
         $this->token = $token;
     }
 
-    /**
-     * Get the application ID.
-     *
-     * @return string
-     */
-    public function getId()
+    public function id(): string
     {
         return $this->id;
     }
 
-    /**
-     * Get the application token.
-     *
-     * @return string
-     */
-    public function getToken()
+    public function token(): string
     {
         return $this->token;
     }

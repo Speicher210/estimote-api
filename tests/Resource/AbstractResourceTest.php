@@ -38,7 +38,7 @@ abstract class AbstractResourceTest extends TestCase
      *
      * @return string
      */
-    abstract protected function getClassUnderTest();
+    abstract protected function getClassUnderTest(): string;
 
     /**
      * Get a client mock.

@@ -72,7 +72,7 @@ class AuthorizationHelper
         return $response->getStatusCode() >= 200 && $response->getStatusCode() < 300;
     }
 
-    public function authorizeApplication($clientId, $clientSecret, $username, $password)
+    public function authorizeApplication($clientId, $clientSecret, $username, $password): string
     {
         $client = new GuzzleClient(['cookies' => true, 'allow_redirects' => true]);
 
@@ -115,7 +115,7 @@ class AuthorizationHelper
         return $json['access_token'];
     }
 
-    public function getAccessToken($authorizationCode, $clientId, $clientSecret)
+    public function getAccessToken($authorizationCode, $clientId, $clientSecret): string
     {
         $client = new GuzzleClient();
         $response = $client->post(
@@ -138,7 +138,7 @@ class AuthorizationHelper
         return $json['access_token'];
     }
 
-    public function generateApplicationForAccess($username, $password, $applicationName)
+    public function generateApplicationForAccess($username, $password, $applicationName): ApplicationAuthorization
     {
         $client = new GuzzleClient(['cookies' => true, 'allow_redirects' => true]);
 
