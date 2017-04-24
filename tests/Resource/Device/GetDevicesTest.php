@@ -36,7 +36,6 @@ class GetDevicesTest extends AbstractResourceTest
         $actual = $actualDevices[0];
 
         self::assertSame('48947e17d20c44cfcc0174618fa06337', $actual->identifier());
-        self::assertSame('lemon', $actual->color());
         self::assertFalse($actual->settings()->general()->isMotionDetectionEnabled());
         self::assertCount(1, $actual->settings()->general()->ndcRecords());
         self::assertNotNull($actual->settings()->advertisers()->ibeacon());

@@ -29,6 +29,12 @@ final class Settings
      */
     private $general;
 
+    public function __construct(Advertisers $advertisers, General $general)
+    {
+        $this->advertisers = $advertisers;
+        $this->general = $general;
+    }
+
     public function advertisers(): Advertisers
     {
         return $this->advertisers;

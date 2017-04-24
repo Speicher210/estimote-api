@@ -22,14 +22,6 @@ class Device
     private $identifier;
 
     /**
-     * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\SerializedName("color")
-     */
-    private $color;
-
-    /**
      * @var Settings
      *
      * @JMS\Type("Speicher210\Estimote\Model\Device\Settings")
@@ -45,14 +37,16 @@ class Device
      */
     private $pendingSettings;
 
+    public function __construct(string $identifier, Settings $settings, ?PendingSettings $pendingSettings)
+    {
+        $this->identifier = $identifier;
+        $this->settings = $settings;
+        $this->pendingSettings = $pendingSettings;
+    }
+
     public function identifier(): string
     {
         return $this->identifier;
-    }
-
-    public function color(): string
-    {
-        return $this->color;
     }
 
     public function settings(): Settings
