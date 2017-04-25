@@ -9,7 +9,7 @@ use JMS\Serializer\Annotation as JMS;
 /**
  * Update data for a device.
  */
-class Update
+final class Update
 {
     /**
      * @var PendingSettings

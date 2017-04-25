@@ -3,7 +3,6 @@
 declare(strict_types = 1);
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
-use JMS\Serializer\SerializerBuilder;
 use Speicher210\Estimote\Auth\Application;
 use Speicher210\Estimote\ClientAppAuth;
 use Speicher210\Estimote\Resource\Device;
@@ -17,9 +16,8 @@ $appToken = 'YOUR-APP-TOKEN';
 $appAuth = new Application($appId, $appToken);
 
 $client = new ClientAppAuth($appAuth);
-$serializer = SerializerBuilder::create()->build();
 
-$deviceResource = new Device($client, $serializer);
+$deviceResource = new Device($client);
 
 $devices = $deviceResource->getDevices();
 

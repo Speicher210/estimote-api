@@ -6,6 +6,8 @@ namespace Speicher210\Estimote;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
 use Speicher210\Estimote\Exception\ApiException;
 use Speicher210\Estimote\Exception\ApiKeyInvalidException;
@@ -33,10 +35,21 @@ abstract class AbstractResource
      * @param Client $client The API client.
      * @param SerializerInterface $serializer Serializer interface to serialize / deserialize the request / responses.
      */
-    public function __construct(Client $client, SerializerInterface $serializer)
+    public function __construct(Client $client, SerializerInterface $serializer = null)
     {
         $this->client = $client;
-        $this->serializer = $serializer;
+        $this->serializer = $serializer ?? $this->buildSerializer();
+    }
+
+    private function buildSerializer(): SerializerInterface
+    {
+        return SerializerBuilder::create()
+            ->setSerializationContextFactory(
+                function () {
+                    return SerializationContext::create()->setSerializeNull(false);
+                }
+            )
+            ->build();
     }
 
     /**
