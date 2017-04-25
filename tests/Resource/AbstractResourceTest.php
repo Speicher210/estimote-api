@@ -17,23 +17,6 @@ use Speicher210\Estimote\AbstractResource;
 abstract class AbstractResourceTest extends TestCase
 {
     /**
-     * The temporary directory for the serializer cache.
-     *
-     * @var string
-     */
-    private static $serializerTempDirectory;
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function setUpBeforeClass()
-    {
-        if (self::$serializerTempDirectory === null) {
-            self::$serializerTempDirectory = \sys_get_temp_dir() . '/' . \uniqid('sp210_estimote_api_test', true);
-        }
-    }
-
-    /**
      * Get the class name under test.
      *
      * @return string
@@ -41,8 +24,6 @@ abstract class AbstractResourceTest extends TestCase
     abstract protected function getClassUnderTest(): string;
 
     /**
-     * Get a client mock.
-     *
      * @param array $clientMethods The methods to mock.
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
@@ -62,7 +43,7 @@ abstract class AbstractResourceTest extends TestCase
      * @param integer $statusCode The HTTP response status code.
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    protected function getClientResponseMock($body, $statusCode = null)
+    protected function getClientResponseMock(string $body, int $statusCode)
     {
         $mock = $this
             ->getMockBuilder(ResponseInterface::class)
@@ -85,7 +66,6 @@ abstract class AbstractResourceTest extends TestCase
     {
         AnnotationRegistry::registerLoader('class_exists');
         $serializer = SerializerBuilder::create()
-            ->setCacheDir(self::$serializerTempDirectory)
             ->build();
 
         $class = $this->getClassUnderTest();
@@ -97,7 +77,7 @@ abstract class AbstractResourceTest extends TestCase
      * @param string $suffix Suffix to identify the file to read.
      * @return string
      */
-    protected function getTestFixture($suffix)
+    protected function getTestFixture($suffix): string
     {
         $reflection = new \ReflectionObject($this);
         $fixturesDirectory = \dirname($reflection->getFileName()) . '/Fixtures/';
