@@ -5,14 +5,14 @@ declare(strict_types = 1);
 namespace Speicher210\Estimote\Model\Device;
 
 use JMS\Serializer\Annotation as JMS;
-use Speicher210\Estimote\Model\Device\Settings\Advertisers;
+use Speicher210\Estimote\Model\Device\PendingSettings\Advertisers;
 
 final class PendingSettings
 {
     /**
      * @var Advertisers
      *
-     * @JMS\Type("Speicher210\Estimote\Model\Device\Settings\Advertisers")
+     * @JMS\Type("Speicher210\Estimote\Model\Device\PendingSettings\Advertisers")
      * @JMS\SerializedName("advertisers")
      */
     private $advertisers;
