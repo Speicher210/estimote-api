@@ -6,8 +6,9 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 use Speicher210\Estimote\Auth\Application;
 use Speicher210\Estimote\ClientAppAuth;
 use Speicher210\Estimote\Model\Device\PendingSettings;
-use Speicher210\Estimote\Model\Device\Settings\Advertisers;
-use Speicher210\Estimote\Model\Device\Settings\Advertisers\IBeacon;
+use Speicher210\Estimote\Model\Device\PendingSettings\Advertisers;
+use Speicher210\Estimote\Model\Device\PendingSettings\Advertisers\IBeacon;
+use Speicher210\Estimote\Model\Device\PendingSettings\Advertisers\EddystoneUrl;
 use Speicher210\Estimote\Model\Device\Update;
 use Speicher210\Estimote\Resource\Device;
 
@@ -26,9 +27,9 @@ $deviceResource = new Device($client);
 
 $currentBeacon = $deviceResource->getDevice($deviceIdentifier);
 $currentIBeacon = $currentBeacon->settings()->advertisers()->ibeacon();
+$currentEddystoneUrl = $currentBeacon->settings()->advertisers()->eddystoneUrl();
 $iBeacon = new IBeacon(
     1,
-    'new name',
     true,
     $currentIBeacon->uuid(),
     $currentIBeacon->major(),
@@ -38,7 +39,15 @@ $iBeacon = new IBeacon(
     $currentIBeacon->nonStrictModeEnabled()
 );
 
-$advertisers = new Advertisers($iBeacon, $currentBeacon->settings()->advertisers()->eddystoneUrl());
+$eddystoneUrl = new EddystoneUrl(
+    1,
+    true,
+    $currentEddystoneUrl->power(),
+    $currentEddystoneUrl->interval(),
+    'https://www.example.com/123456798123456798'
+);
+
+$advertisers = new Advertisers($iBeacon, $eddystoneUrl);
 $pendingSettings = new PendingSettings($advertisers);
 $newData = new Update($pendingSettings);
 $response = $deviceResource->updateDevice($deviceIdentifier, $newData);

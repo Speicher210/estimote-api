@@ -47,7 +47,6 @@ class UpdateTest extends AbstractResourceTest
                                     'ibeacon' => [
                                         [
                                             'index' => 1,
-                                            'name' => 'my ibeacon',
                                             'enabled' => true,
                                             'uuid' => 'B36C37A3-875F-4E56-9905-1F8BDC815E03',
                                             'major' => 123,
@@ -70,7 +69,7 @@ class UpdateTest extends AbstractResourceTest
             )
             ->willReturn($responseMock);
 
-        $iBeacon = new IBeacon(1, 'my ibeacon', true, 'B36C37A3-875F-4E56-9905-1F8BDC815E03', 123, 456, 0, 150, true);
+        $iBeacon = new IBeacon(1, true, 'B36C37A3-875F-4E56-9905-1F8BDC815E03', 123, 456, 0, 150, true);
         $advertisers = new Advertisers($iBeacon, null);
         $pendingSettings = new PendingSettings($advertisers);
         $updateData = new Update($pendingSettings);
@@ -129,8 +128,8 @@ class UpdateTest extends AbstractResourceTest
             )
             ->willReturn($responseMock);
 
-        $iBeacon = new IBeacon(1, null, true, null, 123, null, null, null, null);
-        $eddystoneUrl = new EddystoneUrl(1, null, null, null, null, 'https://example.com/abcdef123');
+        $iBeacon = new IBeacon(1, true, null, 123, null, null, null, null);
+        $eddystoneUrl = new EddystoneUrl(1, null, null, null, 'https://example.com/abcdef123');
         $advertisers = new Advertisers($iBeacon, $eddystoneUrl);
         $pendingSettings = new PendingSettings($advertisers);
         $updateData = new Update($pendingSettings);

@@ -17,14 +17,6 @@ final class EddystoneUrl
     private $index;
 
     /**
-     * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\SerializedName("name")
-     */
-    private $name;
-
-    /**
      * @var bool
      *
      * @JMS\Type("boolean")
@@ -58,10 +50,9 @@ final class EddystoneUrl
      */
     private $url;
 
-    public function __construct(int $index, ?string $name, ?bool $enabled, ?int $power, ?int $interval, ?string $url)
+    public function __construct(int $index, ?bool $enabled, ?int $power, ?int $interval, ?string $url)
     {
         $this->index = $index;
-        $this->name = $name;
         $this->enabled = $enabled;
         $this->power = $power;
         $this->interval = $interval;
@@ -71,11 +62,6 @@ final class EddystoneUrl
     public function index(): int
     {
         return $this->index;
-    }
-
-    public function name(): ?string
-    {
-        return $this->name;
     }
 
     public function isEnabled(): ?bool

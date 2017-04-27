@@ -17,14 +17,6 @@ final class IBeacon
     private $index;
 
     /**
-     * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\SerializedName("name")
-     */
-    private $name;
-
-    /**
      * @var bool
      *
      * @JMS\Type("boolean")
@@ -84,7 +76,6 @@ final class IBeacon
 
     public function __construct(
         int $index,
-        ?string $name,
         ?bool $enabled,
         ?string $uuid,
         ?int $major,
@@ -94,7 +85,6 @@ final class IBeacon
         ?bool $nonStrictModeEnabled
     ) {
         $this->index = $index;
-        $this->name = $name;
         $this->enabled = $enabled;
         $this->uuid = $uuid;
         $this->major = $major;
@@ -107,11 +97,6 @@ final class IBeacon
     public function index(): int
     {
         return $this->index;
-    }
-
-    public function name(): ?string
-    {
-        return $this->name;
     }
 
     public function isEnabled(): ?bool
